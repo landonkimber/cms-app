@@ -1,0 +1,16 @@
+{
+    "name": "cms-app",
+    "version": "1.0.0",
+    "description": "This application is a content management system, CMS, for business owners and managers. This application allows the user to view and mange departments, roles, and employees within their company.",
+    "main": "index.js",
+    "scripts": {
+      "start": "node index.js"
+    },
+    "license": "MIT",
+    "dependencies": {
+        "inquirer": "8.2.4",
+        "dotenv": "^8.2.0",
+        "mysql2": "^2.2.5"
+      }
+  }
+  
