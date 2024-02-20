@@ -27,7 +27,7 @@ const startupQuestions = [
       "Add department",
       "Add role",
       "Add employee",
-      "Update employee role",
+      "Update employee",
       "QUIT",
     ],
   },
