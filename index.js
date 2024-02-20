@@ -1,14 +1,18 @@
 const inquirer = require("inquirer");
+
 const {
   getAllDepartments,
   getAllRoles,
   getAllEmployees,
 } = require("./dbFucntions/dbDisplayFunctions");
+
 const {
   addDBDepartment,
   addDBRole,
   addDBEmployee,
 } = require("./dbFucntions/dbAddFunctions");
+
+const { updateDBEmployee } = require("./dbFucntions/dbUpdateFunctions");
 
 const startupQuestions = [
   {
@@ -78,6 +82,35 @@ const addEmp = [
       "Please type in the id of the manager of the employee you are adding.",
   },
 ];
+
+const upEmp = [
+  {
+    type: "input",
+    name: "id",
+    message: "Please type in the id of the employee you are updating.",
+  },
+  {
+    type: "input",
+    name: "firstname",
+    message: "Please type in the first name of the employee you are updating.",
+  },
+  {
+    type: "input",
+    name: "lastname",
+    message: "Please type in the last name of the employee you are updating.",
+  },
+  {
+    type: "input",
+    name: "roleId",
+    message: "Please type in the role id of the employee you are updating.",
+  },
+  {
+    type: "input",
+    name: "managerId",
+    message:
+      "Please type in the id of the manager of the employee you are updating.",
+  },
+]
 
 function askPromptQuestions() {
   inquirer.prompt(startupQuestions).then((choice) => {
@@ -170,7 +203,29 @@ function askPromptQuestions() {
           });
         break;
       case "Update employee role":
-        nextPrompt = updateEmp;
+        inquirer
+          .prompt(upEmp)
+          .then((entry) => {
+            updateDBEmployee({
+              id: entry.id,
+              first_name: entry.firstname,
+              last_name: entry.lastname,
+              role_id: entry.roleId,
+              manager_id: entry.managerId,
+            })
+              .then(() => askPromptQuestions())
+              .catch((err) => {
+                console.error(
+                  err,
+                  "\nError updating employee. Please try again."
+                );
+                askPromptQuestions();
+              });
+          })
+          .catch((err) => {
+            console.error(err, "\nError showing data. Please try again.");
+            askPromptQuestions();
+          });
         break;
       default:
         console.log("Invalid input. Please select a valid option.");

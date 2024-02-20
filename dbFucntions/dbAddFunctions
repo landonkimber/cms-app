@@ -1,4 +1,4 @@
-const db = require("../config"); // Assuming you have a database module
+const db = require("../config");
 
 function addDBDepartment(depName) {
   return new Promise((resolve, reject) => {
